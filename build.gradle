@@ -12,6 +12,11 @@ buildscript {
 group 'modelo-jvm'
 version '1.0-SNAPSHOT'
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
 apply plugin: 'kotlin'
 
 repositories {
@@ -19,7 +24,11 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "com.squareup.moshi:moshi-kotlin:1.5.0"
+    compile "com.squareup.moshi:moshi-adapters:1.5.0"
+    compile "com.squareup.okhttp3:okhttp:3.8.0"
+    testCompile "io.kotlintest:kotlintest:2.0.2"
 }
 
 compileKotlin {
