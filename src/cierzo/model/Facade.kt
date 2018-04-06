@@ -132,7 +132,7 @@ fun createPlaylist(name: String, description: String) {
  * @param name: Name of the new playlist
  * @param description: Description of the new playlist
  */
-fun updatePlaylist(id: String, songList: SongList, name: String, description: String) {
+fun updatePlaylist(id: String, songList: String, name: String, description: String) {
 
 }
 
@@ -177,7 +177,7 @@ fun deleteSongFromPlaylist(idList: String, idSong: String) {
  * @param pag: View page number
  * @param limit: Maximum number of songs in the view
  */
-fun fetchProfileByName(name: String, pag: Int, limit: Int) : List<User>? {
+fun fetchProfileByName(name: String, pag: Int, limit: Int) : List<String>? {
     return null
 }
 
@@ -188,7 +188,7 @@ fun fetchProfileByName(name: String, pag: Int, limit: Int) : List<User>? {
  * @param pag: View page number
  * @param limit: Maximum number of songs in the view
  */
-fun fetchProfileByUsername(username: String, pag: Int, limit: Int) : User? {
+fun fetchProfileByUsername(username: String, pag: Int, limit: Int) : String? {
     return null
 }
 
@@ -199,7 +199,7 @@ fun fetchProfileByUsername(username: String, pag: Int, limit: Int) : User? {
  * @param pag: View page number
  * @param limit: Maximum number of songs in the view
  */
-fun fetchProfileById(id: String, pag: Int, limit: Int) : User? {
+fun fetchProfileById(id: String, pag: Int, limit: Int) : String? {
     return null
 }
 
@@ -208,7 +208,7 @@ fun fetchProfileById(id: String, pag: Int, limit: Int) : User? {
  * Param:
  * @param user: New user
  */
-fun signupUser(user: User) {
+fun signupUser(user: String) {
 
 }
 
@@ -217,7 +217,7 @@ fun signupUser(user: User) {
  * Param:
  * @param user: user
  */
-fun loginUser(user: User) {
+fun loginUser(user: String) {
 
 }
 
@@ -226,7 +226,7 @@ fun loginUser(user: User) {
  * Param:
  * @param user: user
  */
-fun logoutUser(user: User) {
+fun logoutUser(user: String) {
 
 }
 
@@ -253,7 +253,7 @@ fun unfollowUser(idUser: String) {
  * Param:
  * @param idUser: id's user
  */
-fun myAccountInfo(idUser: String): User? {
+fun myAccountInfo(idUser: String): String? {
     return null
 }
 
@@ -263,7 +263,7 @@ fun myAccountInfo(idUser: String): User? {
  * @param idUser: id's user
  * @param user: New info
  */
-fun updateAccountInfo(idUser: String, user: User) {
+fun updateAccountInfo(idUser: String, user: String) {
 
 }
 
@@ -282,7 +282,7 @@ fun deleteAccount(idUser: String) {
  * @param idUser: id's user
  * @param user: New info
  */
-fun updateCredentialsAccount(idUser: String, user: User) {
+fun updateCredentialsAccount(idUser: String, user: String) {
 
 }
 
@@ -291,7 +291,7 @@ fun updateCredentialsAccount(idUser: String, user: User) {
  * Param:
  * @param idUser: id's user
  */
-fun fetchSongMoment(): Song? {
+fun fetchSongMoment(): String? {
     return null
 }
 
@@ -303,7 +303,7 @@ fun fetchSongMoment(): Song? {
  * @param song: Song that I was listening
  * @param time: Time's song that I was listening
  */
-fun saveSongMoment(idUser: String, playList: SongList, song: Song, time: Int) {
+fun saveSongMoment(idUser: String, playList: String, song: String, time: Int) {
 
 }
 
