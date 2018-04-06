@@ -1,7 +1,10 @@
 package cierzo.model
 
+import io.swagger.client.infrastructure.ClientException
+import io.swagger.client.infrastructure.ServerException
 import io.swagger.client.models.PlaylistItem
 import io.swagger.client.models.SongItem
+import java.io.File
 
 // TODO: Re-hacer la fachada una vez estén listos los objetos
 
@@ -58,7 +61,7 @@ fun fetchSongById(id: String) : SongItem? {
  * @param songId: Song id
  */
 /*fun fetchSongFile(songId: String): File? {
-    val apiInstance = PublicApi()
+    val apiInstance = APIConnector.publicApi
     val songFile : File? =
         try {
             apiInstance.getSongFile(songId)
