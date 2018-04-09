@@ -29,10 +29,11 @@ class Song(
     var fileURL: String
 ) {
 
+    // TODO: Cambiar las URL de debug por las que propocione la API
     constructor(songItem: SongItem) : this(songItem.id, songItem.name, songItem.authorID, songItem.albumName,
             songItem.albumID, songItem.albumName, songItem.lenght, songItem.genre,
             "http://files.jenesaispop.com/wp-content/uploads/2015/11/amaral-nocturnal.jpg",
-            "https://www.ivoox.com/enrique-iglesias-bailando-ft-sean-paul_md_3019937_1.mp3")
+            "https://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3")
 
     // TODO: Implementar estos métodos en APIConnector.
     /*fun getAuthor(): Author {
