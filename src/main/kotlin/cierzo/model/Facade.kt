@@ -1,5 +1,6 @@
 package cierzo.model
 
+import cierzo.model.objects.Song
 import io.swagger.client.infrastructure.ClientException
 import io.swagger.client.infrastructure.ServerException
 import io.swagger.client.models.PlaylistItem
@@ -308,6 +309,18 @@ fun fetchSongMoment(): String? {
  */
 fun saveSongMoment(idUser: String, playList: String, song: String, time: Int) {
 
+}
+
+/**
+ * Get a Song by ID
+ */
+fun getSong(songID: String): Song? {
+    var songItem = APIConnector.getSongInfo(songID)
+    return if (songItem != null) {
+        Song(songItem)
+    } else {
+        null
+    }
 }
 
 
