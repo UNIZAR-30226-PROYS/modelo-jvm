@@ -1,10 +1,8 @@
 package cierzo.model
 
 import cierzo.model.objects.Song
-import io.swagger.client.infrastructure.ClientException
-import io.swagger.client.infrastructure.ServerException
-import io.swagger.client.models.PlaylistItem
-import io.swagger.client.models.SongItem
+import io.swagger.client.model.PlaylistItem
+import io.swagger.client.model.SongItem
 import java.io.File
 
 // TODO: Re-hacer la fachada una vez estén listos los objetos
@@ -314,14 +312,14 @@ fun saveSongMoment(idUser: String, playList: String, song: String, time: Int) {
 /**
  * Get a Song by ID
  */
-fun getSong(songID: String): Song? {
+/*fun getSong(songID: String): Song? {
     var songItem = APIConnector.getSongInfo(songID)
     return if (songItem != null) {
         Song(songItem)
     } else {
         null
     }
-}
+}*/
 
 
 

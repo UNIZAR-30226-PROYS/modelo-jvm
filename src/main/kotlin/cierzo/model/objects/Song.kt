@@ -1,7 +1,7 @@
 package cierzo.model.objects
 
 import cierzo.model.APIConnector
-import io.swagger.client.models.SongItem
+import io.swagger.client.model.SongItem
 import java.io.File
 
 /**
@@ -16,7 +16,7 @@ import java.io.File
  * @param fileURL: Ruta del fichero de la cancion
  *
  */
-class Song(
+class Song (
     var id: String,
     var name: String,
     var authorID: String,
@@ -24,7 +24,7 @@ class Song(
     var albumID: String,
     var albumName: String,
     var length: String,
-    var genre: Array<String>,
+    var genre: List<String>,
     var imageURL: String,
     var fileURL: String
 ) {
