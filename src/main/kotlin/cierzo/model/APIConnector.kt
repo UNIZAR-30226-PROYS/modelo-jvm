@@ -1,15 +1,28 @@
 package cierzo.model
 
+import cierzo.model.objects.Playlist
+import io.swagger.client.ApiClient
 import io.swagger.client.ApiException
 import io.swagger.client.api.AdminsApi
 import io.swagger.client.api.PublicApi
 import io.swagger.client.api.UsersApi
 import io.swagger.client.model.*
+import java.net.CookieHandler
+
+
 
 object APIConnector {
-    internal val publicApi: PublicApi = PublicApi()
-    internal val adminsApi: AdminsApi = AdminsApi()
-    internal val usersApi: UsersApi = UsersApi()
+    internal var apiClient: ApiClient = ApiClient()
+    internal var publicApi: PublicApi = PublicApi(apiClient)
+    internal var adminsApi: AdminsApi = AdminsApi(apiClient)
+    internal var usersApi: UsersApi = UsersApi(apiClient)
+
+    fun init() {
+        apiClient.httpClient.cookieHandler = CookieHandler.getDefault()
+        publicApi = PublicApi(apiClient)
+        adminsApi = AdminsApi(apiClient)
+        usersApi = UsersApi(apiClient)
+    }
 
     fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 1,
                     limit: Int = 1): List<SongItem>? {
@@ -18,6 +31,16 @@ object APIConnector {
         } catch (e: ApiException) {
             null
         }
+    }
+
+    fun getPlaylist(playlistID: Int): Playlist? {
+        try {
+            return Playlist(publicApi.getPlaylist(playlistID.toString()))
+        } catch (e: ApiException) {
+            System.err.println(e.code)
+            System.err.print(e.responseBody)
+        }
+        return null
     }
 
     /*fun getSongInfo(songID: String): SongItem? {
