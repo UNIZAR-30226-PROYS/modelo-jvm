@@ -2,8 +2,10 @@ package cierzo.model.objects
 
 object SongQueue {
     var playingSongs: MutableList<Song> = mutableListOf()
+    var originalPlaylist: MutableList<Song> = mutableListOf()
     var actualSongIndex: Int = 0
     var repeat: Boolean = false
+    var random: Boolean = false
 
     /**
      * Return the last song played on this list.
@@ -11,11 +13,14 @@ object SongQueue {
      *
      */
     fun getPreviousSong(): Song {
-        return if (actualSongIndex == 0) {
-            playingSongs[actualSongIndex]
+        if (actualSongIndex == 0) {
+            if (repeat) {
+                actualSongIndex = playingSongs.lastIndex
+            }
         } else {
-            playingSongs[actualSongIndex--]
+            actualSongIndex -= 1
         }
+        return playingSongs[actualSongIndex]
     }
 
     /**
@@ -23,23 +28,32 @@ object SongQueue {
      * If there aren't next song and repeat isn't active, return null.
      */
     fun getNextSong(): Song? {
-        return if (actualSongIndex == playingSongs.lastIndex) {
-            null
+        if (actualSongIndex == playingSongs.lastIndex) {
+            if (repeat) {
+                actualSongIndex = 0
+            } else {
+                return null
+            }
         } else {
-            playingSongs[actualSongIndex++]
+            actualSongIndex += 1
         }
+        return playingSongs[actualSongIndex]
     }
 
     /**
      * Randomize the next songs.
      *
      */
-    fun randomize() {
-        var prev: MutableList<Song> = playingSongs.subList(0, actualSongIndex)
-        var next: MutableList<Song> = playingSongs.subList(actualSongIndex+1, playingSongs.lastIndex)
-        next.shuffle()
-        prev.addAll(next)
-        playingSongs = prev
+    fun toggleRandom() {
+        if (!random) {
+            var prev: MutableList<Song> = playingSongs.subList(0, actualSongIndex + 1)
+            var next: MutableList<Song> = playingSongs.subList(actualSongIndex + 1, playingSongs.lastIndex + 1)
+            next.shuffle()
+            prev.addAll(next)
+            playingSongs = prev
+        } else {
+            playingSongs = originalPlaylist
+        }
     }
 
     /**
@@ -49,6 +63,7 @@ object SongQueue {
     fun replaceListPlaying(songList: List<Song>) {
         playingSongs = songList.toMutableList()
         actualSongIndex = 0
+        originalPlaylist = playingSongs
     }
 
     /**

@@ -13,12 +13,11 @@ import java.net.CookieHandler
 
 object APIConnector {
     internal var apiClient: ApiClient = ApiClient()
-    internal var publicApi: PublicApi = PublicApi(apiClient)
-    internal var adminsApi: AdminsApi = AdminsApi(apiClient)
-    internal var usersApi: UsersApi = UsersApi(apiClient)
+    internal var publicApi: PublicApi
+    internal var adminsApi: AdminsApi
+    internal var usersApi: UsersApi
 
-    fun init() {
-        apiClient.httpClient.cookieHandler = CookieHandler.getDefault()
+    init {
         publicApi = PublicApi(apiClient)
         adminsApi = AdminsApi(apiClient)
         usersApi = UsersApi(apiClient)
@@ -33,14 +32,15 @@ object APIConnector {
         }
     }
 
-    fun getPlaylist(playlistID: Int): Playlist? {
+    /**
+     * Get a Playlist from the server.
+     */
+    fun getPlaylist(playlistID: Int): Playlist {
         try {
             return Playlist(publicApi.getPlaylist(playlistID.toString()))
         } catch (e: ApiException) {
-            System.err.println(e.code)
-            System.err.print(e.responseBody)
+            throw e
         }
-        return null
     }
 
     /*fun getSongInfo(songID: String): SongItem? {
