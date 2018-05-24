@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
@@ -41,7 +43,9 @@ import io.swagger.client.auth.OAuth;
 
 public class ApiClient {
 
-    private String basePath = "http://192.168.0.160:8080/api";
+    private String basePath = "http://192.168.1.53:8080/api"; // Roberto
+    //private String basePath = "http://192.168.0.160:8080/api"; // Jose Felix
+    //private String basePath = "http://localhost:8080/api"; // Localhost
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
@@ -67,6 +71,9 @@ public class ApiClient {
      */
     public ApiClient() {
         httpClient = new OkHttpClient();
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        httpClient.setCookieHandler(cookieManager);
 
         verifyingSsl = true;
 

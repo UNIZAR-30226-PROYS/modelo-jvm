@@ -1,7 +1,7 @@
 package cierzo.model.objects
 
+import cierzo.model.ItemArrayConverter
 import io.swagger.client.model.PlaylistItem
-import io.swagger.client.model.SongItem
 import org.threeten.bp.LocalDate
 
 /**
@@ -25,16 +25,6 @@ class Playlist(
     var imagenURL: String
 ) {
 
-    constructor(playlistItem: PlaylistItem): this(playlistItem.id, songItemConverter(playlistItem.songs), playlistItem.name, playlistItem.ownerID,
+    constructor(playlistItem: PlaylistItem): this(playlistItem.id, ItemArrayConverter.songFromSongs(playlistItem.songs), playlistItem.name, playlistItem.ownerID,
             playlistItem.description, playlistItem.creationDate, "")
-
-    companion object {
-        fun songItemConverter(songItems: MutableList<SongItem>): MutableList<Song> {
-            var songList: MutableList<Song> = mutableListOf()
-            for (songItem in songItems) {
-                songList.add(Song(songItem))
-            }
-            return songList
-        }
-    }
 }

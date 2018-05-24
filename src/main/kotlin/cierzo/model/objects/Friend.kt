@@ -1,5 +1,8 @@
 package cierzo.model.objects
 
+import io.swagger.client.model.ProfileItem
+import io.swagger.client.model.SongItem
+
 /**
  * Clase que representa un amigo en la aplicacion
  * @param id: ID del amigo

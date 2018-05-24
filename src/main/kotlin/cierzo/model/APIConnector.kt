@@ -1,6 +1,8 @@
 package cierzo.model
 
 import cierzo.model.objects.Playlist
+import cierzo.model.objects.UserLogged
+import io.swagger.annotations.Api
 import io.swagger.client.ApiClient
 import io.swagger.client.ApiException
 import io.swagger.client.api.AdminsApi
@@ -12,10 +14,10 @@ import java.net.CookieHandler
 
 
 object APIConnector {
-    internal var apiClient: ApiClient = ApiClient()
-    internal var publicApi: PublicApi
-    internal var adminsApi: AdminsApi
-    internal var usersApi: UsersApi
+    private var apiClient: ApiClient = ApiClient()
+    private var publicApi: PublicApi
+    private var adminsApi: AdminsApi
+    private var usersApi: UsersApi
 
     init {
         publicApi = PublicApi(apiClient)
@@ -41,6 +43,43 @@ object APIConnector {
         } catch (e: ApiException) {
             throw e
         }
+    }
+
+    /**
+     * Do login and create the profile
+     */
+    internal fun login(mail: String, pass: String) {
+        var loginItem: LoginItem = LoginItem()
+        loginItem.mail = mail
+        loginItem.pass = pass
+
+        if (!UserLogged.isLogged()) {
+            try {
+                var accountItem: AccountItem = publicApi.login(loginItem)
+                UserLogged.onLogin(accountItem)
+            } catch (e: ApiException) {
+                throw e
+            }
+        } else {
+            throw Exception("An user is already logged")
+        }
+    }
+
+    internal fun logout() {
+        if (UserLogged.isLogged()) {
+            try {
+                usersApi.logout()
+                UserLogged.onLogout()
+            } catch (e: ApiException) {
+                throw e
+            }
+        } else {
+            throw Exception("No user logged")
+        }
+    }
+
+    internal fun getProfileItem(profileId: String): ProfileItem {
+        return publicApi.getProfile(profileId)
     }
 
     /*fun getSongInfo(songID: String): SongItem? {

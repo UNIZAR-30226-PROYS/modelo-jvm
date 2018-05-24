@@ -9,10 +9,10 @@ import io.swagger.client.model.AccountItem
 import io.swagger.client.model.LoginItem
 import io.swagger.client.model.SignUpItem
 
-
+// Old Tests
 /*fun testProfile(id: String = "1") {
     try {
-        var profileItem = publicApi.getProfile(id)
+        var profileItem = APIConnector.publicApi.getProfile(id)
         System.out.println("Resultado: " + profileItem.name)
     } catch (e: ApiException) {
         System.err.println("Exception when calling PublicApi#createAccount")
@@ -20,43 +20,49 @@ import io.swagger.client.model.SignUpItem
     }
 }
 
-fun testSignup() {
+fun testSignup(): Boolean {
     var signupItem = SignUpItem()
     signupItem.mail = "correo2@dominio.com"
     signupItem.name = "Usuario2"
     signupItem.pass = "123"
     signupItem.username = "usuarioGuay2"
     try {
-        var accountItem: AccountItem = publicApi.createAccount(signupItem)
+        var accountItem: AccountItem = APIConnector.publicApi.createAccount(signupItem)
         System.out.println("Registrado como: " + accountItem.name)
+        return true
     } catch (e: ApiException) {
         System.err.println("Exception (Signup)")
         e.printStackTrace()
+        return false
     }
 }
 
-fun testLogin() {
+fun testLogin(): Boolean {
     var loginItem = LoginItem()
     loginItem.mail = "correo2@dominio.com"
     loginItem.pass = "123"
     try {
-        var accountItem: AccountItem = publicApi.login(loginItem)
+        var accountItem: AccountItem = APIConnector.publicApi.login(loginItem)
         System.out.println("Sesión iniciada como: " + accountItem.name)
+        return true
     } catch (e: ApiException) {
         System.err.println("Exception (Login)")
         e.printStackTrace()
+        return false
     }
 }
 
-fun testLogout() {
+fun testLogout(): Boolean {
     try {
-        var accountItem = usersApi.logout()
+        var accountItem = APIConnector.usersApi.logout()
         System.out.println("Sesión cerrada")
+        return true
     } catch (e: ApiException) {
         System.err.println("Exception (Logout)")
         e.printStackTrace()
+        return false
     }
-}*/
+}
 
 fun testSongQueue(id:Int) {
     // Get Playlists
@@ -161,8 +167,15 @@ fun testCollectionSongQueue() {
     System.out.println("Saltamos a " + SongQueue.getPreviousSong()?.name)
     System.out.println("Estamos en " + SongQueue.actualSongIndex + " que es la canción " + SongQueue.playingSongs[SongQueue.actualSongIndex].name)
     System.out.println("Saltamos a " + SongQueue.getPreviousSong()?.name)
-}
+}*/
 
 fun main(args : Array<String>) {
-    testCollectionSongQueue()
+    // Old tests
+    /* testProfile("1")
+    testSignup()
+    testLogin()
+    testLogout()
+
+    testCollectionSongQueue()*/
+    
 }
