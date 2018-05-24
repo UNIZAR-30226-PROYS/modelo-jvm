@@ -22,6 +22,14 @@ object ItemArrayConverter {
         return userList
     }
 
+    fun userFromProfile(profileItems: MutableList<ProfileItem>): MutableList<User> {
+        var userList: MutableList<User> = mutableListOf()
+        for (profileItem in profileItems) {
+            userList.add(User(profileItem))
+        }
+        return userList
+    }
+
     fun playlistFromPlaylist(playlistItems: MutableList<PlaylistItem>): MutableList<Playlist> {
         var playlistList: MutableList<Playlist> = mutableListOf()
         for (playlistItem in playlistItems) {

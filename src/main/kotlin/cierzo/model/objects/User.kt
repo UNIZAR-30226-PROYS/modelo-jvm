@@ -26,6 +26,9 @@ class User(
     private val accountItem: AccountItem?,
     private var profileItem: ProfileItem?) {
 
+    var storedPlaylists: MutableList<Playlist> = mutableListOf()
+    var storedFriends: MutableList<User> = mutableListOf()
+
     constructor(accountItem: AccountItem) : this(
         id = accountItem.id,
         username = accountItem.username,
@@ -51,24 +54,48 @@ class User(
         profileItem = profileItem)
 
     fun getFriends(): List<User> {
-        if (accountItem != null) {
-            return ItemArrayConverter.userFromFriend(accountItem.friends)
-        } else if (profileItem != null) {
-            return ItemArrayConverter.userFromFriend(profileItem!!.friends)
-        } else {
-            profileItem = APIConnector.getProfileItem(id)
-            return ItemArrayConverter.userFromFriend(profileItem!!.friends)
+        if (storedFriends.isEmpty()) {
+            storedFriends = if (accountItem != null) {
+                ItemArrayConverter.userFromFriend(accountItem.friends)
+            } else if (profileItem != null) {
+                ItemArrayConverter.userFromFriend(profileItem!!.friends)
+            } else {
+                profileItem = APIConnector.getProfileItem(id)
+                ItemArrayConverter.userFromFriend(profileItem!!.friends)
+            }
         }
+        return storedFriends.toList()
     }
 
     fun getPlaylists(): List<Playlist> {
-        if (accountItem != null) {
-            return ItemArrayConverter.playlistFromPlaylist(accountItem.playlists)
-        } else if (profileItem != null) {
-            return ItemArrayConverter.playlistFromPlaylist(profileItem!!.playlists)
-        } else {
-            profileItem = APIConnector.getProfileItem(id)
-            return ItemArrayConverter.playlistFromPlaylist(profileItem!!.playlists)
+        if (storedPlaylists.isEmpty()) {
+            storedPlaylists = if (accountItem != null) {
+                ItemArrayConverter.playlistFromPlaylist(accountItem.playlists)
+            } else if (profileItem != null) {
+                ItemArrayConverter.playlistFromPlaylist(profileItem!!.playlists)
+            } else {
+                profileItem = APIConnector.getProfileItem(id)
+                ItemArrayConverter.playlistFromPlaylist(profileItem!!.playlists)
+            }
         }
+        return storedPlaylists.toList()
+    }
+
+    private fun updateStoredPlaylists() {
+        storedPlaylists = APIConnector.getUser(id).getPlaylists().toMutableList()
+    }
+
+    private fun updateStoredFriends() {
+        storedFriends = APIConnector.getUser(id).getFriends().toMutableList()
+    }
+
+    internal fun newPlaylist(name: String, desc: String) {
+        APIConnector.newPlaylist(name, desc)
+        updateStoredPlaylists()
+    }
+
+    internal fun newFriend(friendId: String) {
+        APIConnector.newFriend(friendId)
+        updateStoredFriends()
     }
 }

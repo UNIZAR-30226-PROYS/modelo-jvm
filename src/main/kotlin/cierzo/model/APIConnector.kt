@@ -1,6 +1,7 @@
 package cierzo.model
 
 import cierzo.model.objects.Playlist
+import cierzo.model.objects.User
 import cierzo.model.objects.UserLogged
 import io.swagger.annotations.Api
 import io.swagger.client.ApiClient
@@ -9,6 +10,7 @@ import io.swagger.client.api.AdminsApi
 import io.swagger.client.api.PublicApi
 import io.swagger.client.api.UsersApi
 import io.swagger.client.model.*
+import sun.java2d.cmm.Profile
 import java.net.CookieHandler
 
 
@@ -25,12 +27,21 @@ object APIConnector {
         usersApi = UsersApi(apiClient)
     }
 
-    fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 1,
-                    limit: Int = 1): List<SongItem>? {
+    internal fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 1,
+                    limit: Int = 1): MutableList<SongItem> {
         return try {
             publicApi.searchSong(name, author, genre, skip, limit)
         } catch (e: ApiException) {
-            null
+            throw e
+        }
+    }
+
+    internal fun searchProfiles(name: String = "", username: String = "", skip: Int = 1, limit: Int = 1)
+            : MutableList<ProfileItem> {
+        return try {
+            publicApi.searchProfiles(name, username, skip, limit)
+        } catch (e: ApiException) {
+            throw e
         }
     }
 
@@ -80,6 +91,25 @@ object APIConnector {
 
     internal fun getProfileItem(profileId: String): ProfileItem {
         return publicApi.getProfile(profileId)
+    }
+
+    internal fun getUser(userId: String): User {
+        return User(publicApi.getProfile(userId))
+    }
+
+    internal fun removePlaylist(playlistId: String) {
+        usersApi.deletePlaylist(playlistId)
+    }
+
+    internal fun newPlaylist(name: String, desc: String) {
+        var playlistItem = PlaylistItemNew()
+        playlistItem.name = name
+        playlistItem.description = desc
+        usersApi.addPlaylist(playlistItem)
+    }
+
+    internal fun newFriend(friendId: String) {
+        usersApi.followProfile(friendId)
     }
 
     /*fun getSongInfo(songID: String): SongItem? {
