@@ -197,4 +197,12 @@ class User(
             throw e
         }
     }
+
+    /**
+     * Edit the credentials of this user.
+     * User must be logged.
+     */
+    internal fun editCredentials(mail: String, pass: String) {
+        APIConnector.editUserCredentials(mail, pass)
+    }
 }

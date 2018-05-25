@@ -215,4 +215,15 @@ object UserLogged {
             throw Exception("User not logged")
         }
     }
+
+    /**
+     * Edit logged user credentials.
+     */
+    public fun editCredentials(mail: String, pass: String) {
+        if (isLogged()) {
+            user!!.editCredentials(mail, pass)
+        } else {
+            throw Exception("User not logged")
+        }
+    }
 }

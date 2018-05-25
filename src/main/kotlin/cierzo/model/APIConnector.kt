@@ -234,4 +234,14 @@ internal object APIConnector {
         accountItem.username = username
         usersApi.updateAccount(accountItem)
     }
+
+    /**
+     * Edit the credentials of a user on the server.
+     */
+    internal fun editUserCredentials(mail: String, pass: String) {
+        var loginItem: LoginItem = LoginItem()
+        loginItem.mail = mail
+        loginItem.pass = pass
+        usersApi.updateAccountCredentials(loginItem)
+    }
 }
