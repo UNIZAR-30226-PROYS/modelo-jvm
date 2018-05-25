@@ -82,7 +82,8 @@ class User(
     }
 
     private fun updateStoredPlaylists() {
-        storedPlaylists = APIConnector.getUser(id).getPlaylists().toMutableList()
+        storedPlaylists = ItemArrayConverter.playlistFromPlaylist(
+                APIConnector.searchPlaylists(ownerUsername = username))
     }
 
     private fun updateStoredFriends() {
@@ -94,8 +95,18 @@ class User(
         updateStoredPlaylists()
     }
 
+    internal fun removePlaylist(index: Int) {
+        storedPlaylists[index].removeThis()
+        storedPlaylists.removeAt(index)
+    }
+
     internal fun newFriend(friendId: String) {
         APIConnector.newFriend(friendId)
+        updateStoredFriends()
+    }
+
+    internal fun removeFriend(friendId: String) {
+        APIConnector.removeFriend(friendId)
         updateStoredFriends()
     }
 }

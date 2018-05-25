@@ -1,8 +1,6 @@
 package cierzo.model
 
-import cierzo.model.objects.Playlist
-import cierzo.model.objects.User
-import cierzo.model.objects.UserLogged
+import cierzo.model.objects.*
 import io.swagger.annotations.Api
 import io.swagger.client.ApiClient
 import io.swagger.client.ApiException
@@ -27,7 +25,7 @@ object APIConnector {
         usersApi = UsersApi(apiClient)
     }
 
-    internal fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 1,
+    internal fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 0,
                     limit: Int = 1): MutableList<SongItem> {
         return try {
             publicApi.searchSong(name, author, genre, skip, limit)
@@ -36,10 +34,19 @@ object APIConnector {
         }
     }
 
-    internal fun searchProfiles(name: String = "", username: String = "", skip: Int = 1, limit: Int = 1)
+    internal fun searchProfiles(name: String = "", username: String = "", skip: Int = 0, limit: Int = 1)
             : MutableList<ProfileItem> {
         return try {
             publicApi.searchProfiles(name, username, skip, limit)
+        } catch (e: ApiException) {
+            throw e
+        }
+    }
+
+    internal fun searchPlaylists(name: String = "", ownerUsername: String = "", skip: Int = 0, limit: Int = 1)
+            : MutableList<PlaylistItem> {
+        return try {
+            publicApi.searchPlaylist(name, ownerUsername, skip, limit)
         } catch (e: ApiException) {
             throw e
         }
@@ -110,6 +117,26 @@ object APIConnector {
 
     internal fun newFriend(friendId: String) {
         usersApi.followProfile(friendId)
+    }
+
+    internal fun removeFriend(friendId: String) {
+        usersApi.unfollowProfile(friendId)
+    }
+
+    internal fun addSong(playlistId: String, songId: String) {
+        usersApi.addPlaylistSong(playlistId, songId)
+    }
+
+    internal fun removeSong(playlistId: String, songId: String) {
+        usersApi.deletePlaylistSong(playlistId, songId)
+    }
+
+    internal fun getAuthor(authorId: String): Author {
+        return Author(publicApi.getAuthor(authorId))
+    }
+
+    internal fun getAlbum(albumId: String): Album {
+        return Album(publicApi.getAlbum(albumId))
     }
 
     /*fun getSongInfo(songID: String): SongItem? {

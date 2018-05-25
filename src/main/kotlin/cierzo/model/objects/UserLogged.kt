@@ -1,5 +1,6 @@
 package cierzo.model.objects
 
+import io.swagger.client.ApiException
 import io.swagger.client.model.AccountItem
 
 object UserLogged {
@@ -29,10 +30,43 @@ object UserLogged {
         }
     }
 
+    fun getAuthorsFromFavorite(): List<Author> {
+        return if (isLogged()) {
+            getFavoritePlaylist().getAuthors()
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
+    fun getAlbumsFromFavorite(): List<Album> {
+        return if (isLogged()) {
+            getFavoritePlaylist().getAlbums()
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
     fun addToFavorite(song: Song): Boolean {
         if (isLogged()) {
-            getFavoritePlaylist().addSong(song)
-            return true
+            try {
+                getFavoritePlaylist().addSong(song)
+                return true
+            } catch (e: ApiException) {
+                throw e
+            }
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
+    fun removeFromFavorite(index: Int): Boolean {
+        if (isLogged()) {
+            try {
+                getFavoritePlaylist().removeSong(index)
+                return true
+            } catch (e: ApiException) {
+                throw e
+            }
         } else {
             throw Exception("User not logged")
         }
@@ -41,6 +75,14 @@ object UserLogged {
     fun newPlaylist(name: String, desc: String) {
         if (isLogged()) {
             user!!.newPlaylist(name, desc)
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
+    fun deletePlaylist(index: Int) {
+        if (isLogged()) {
+            user!!.removePlaylist(index)
         } else {
             throw Exception("User not logged")
         }

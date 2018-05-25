@@ -1,8 +1,6 @@
 package cierzo.model
 
-import cierzo.model.objects.Playlist
-import cierzo.model.objects.Song
-import cierzo.model.objects.User
+import cierzo.model.objects.*
 import io.swagger.client.model.*
 
 object ItemArrayConverter {
@@ -36,5 +34,21 @@ object ItemArrayConverter {
             playlistList.add(Playlist(playlistItem))
         }
         return playlistList
+    }
+
+    fun authorFromAuthor(authorItems: MutableList<AuthorItem>): MutableList<Author> {
+        var authorList: MutableList<Author> = mutableListOf()
+        for (authorItem in authorItems) {
+            authorList.add(Author(authorItem))
+        }
+        return authorList
+    }
+
+    fun albumFromAlbum(albumItems: MutableList<AlbumItem>): MutableList<Album> {
+        var albumList: MutableList<Album> = mutableListOf()
+        for (albumItem in albumItems) {
+            albumList.add(Album(albumItem))
+        }
+        return albumList
     }
 }

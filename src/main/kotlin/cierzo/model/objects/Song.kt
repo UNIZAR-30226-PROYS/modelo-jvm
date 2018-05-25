@@ -29,26 +29,17 @@ class Song (
     var fileURL: String
 ) {
 
-    // TODO: Cambiar las URL de debug por las que propocione la API
-    constructor(songItem: SongItem) : this(songItem.id, songItem.name, songItem.authorID, songItem.albumName,
-            songItem.albumID, songItem.albumName, songItem.lenght, songItem.genre,
-            "http://files.jenesaispop.com/wp-content/uploads/2015/11/amaral-nocturnal.jpg",
-            "https://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3")
+    constructor(songItem: SongItem) : this(
+            id = songItem.id,
+            name = songItem.name,
+            authorID = songItem.authorID,
+            authorName = songItem.authorName,
+            albumID = songItem.albumID,
+            albumName = songItem.albumName,
+            length = songItem.lenght,
+            genre = songItem.genre,
+            imageURL = "http://localhost:8080/api/songs/${songItem.id}/image",
+            fileURL = "http://localhost:8080/api/songs/${songItem.id}/file")
 
-    // TODO: Implementar estos métodos en APIConnector.
-    /*fun getAuthor(): Author {
-        return APIConnector.getAuthor(authorID)
-    }
 
-    fun getAlbum(): Album {
-        return APIConnector.getAlbum(albumID)
-    }
-
-    fun getImageFile(): File {
-        return APIConnector.getSongImage(id)
-    }
-
-    fun getFile(): File {
-        return APIConnector.getSongFile(id)
-    }*/
 }

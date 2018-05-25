@@ -1,5 +1,9 @@
 package cierzo.model.objects
 
+import cierzo.model.ItemArrayConverter
+import io.swagger.client.model.AlbumItem
+import org.threeten.bp.LocalDate
+
 /**
  * Clase que representa un album de canciones
  * @param id: ID del album
@@ -14,11 +18,22 @@ package cierzo.model.objects
  */
 class Album (
     var id: String,
-    var songs: Array<Song>,
-    var nombre: String,
-    var idAutor: String,
-    var nombreAutor: String,
-    var imagenURL: String,
+    var songs: List<Song>,
+    var name: String,
+    var authorId: String,
+    var authorName: String,
+    var imageURL: String,
     var desc: String,
-    var fecha: String
-){}
+    var date: LocalDate
+){
+    constructor(albumItem: AlbumItem) : this(
+            id = albumItem.id,
+            songs = ItemArrayConverter.songFromSongs(albumItem.songs),
+            name = albumItem.name,
+            authorId = albumItem.authorID,
+            authorName = albumItem.authorName,
+            imageURL = "http://localhost:8080/api/albums/${albumItem.id}/image",
+            desc = albumItem.description,
+            date = albumItem.publishDate
+    )
+}

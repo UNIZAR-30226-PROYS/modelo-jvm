@@ -2,6 +2,7 @@ package cierzo.model.objects
 
 import cierzo.model.APIConnector
 import cierzo.model.ItemArrayConverter
+import io.swagger.client.ApiException
 import io.swagger.client.model.PlaylistItem
 import org.threeten.bp.LocalDate
 
@@ -22,7 +23,7 @@ class Playlist(
     var name: String,
     private var ownerId: String,
     var description: String,
-    var date: LocalDate?,
+    var date: LocalDate,
     var imageURL: String,
     var songAmount: Int
 ) {
@@ -48,19 +49,46 @@ class Playlist(
         }
     }
 
-    fun addSong(song: Song, index: Int = songs.lastIndex) {
-        songs.add(index, song)
+    fun addSong(song: Song) {
+        try {
+            APIConnector.addSong(id, song.id)
+            songs.add(song)
+        } catch (e: ApiException) {
+            throw e
+        }
+
     }
 
     fun removeSong(index: Int) {
-        songs.removeAt(index)
+        try {
+            APIConnector.removeSong(id, songs[index].id)
+            songs.removeAt(index)
+        } catch (e: ApiException) {
+            throw e
+        }
     }
 
     fun reorder(index1: Int, index2: Int) {
         songs[index1] = songs[index2].also { songs[index2] = songs[index1] }
     }
 
-    fun removeThis() {
+    internal fun removeThis() {
         APIConnector.removePlaylist(id)
+    }
+
+    fun getAuthors(): List<Author> {
+        var authors: MutableList<Author> = mutableListOf()
+        for (song in songs) {
+            authors.add(APIConnector.getAuthor(song.authorID))
+        }
+        return authors.distinct()
+    }
+
+    fun getAlbums(): List<Album> {
+        var albums: MutableList<Album> = mutableListOf()
+        for (song in songs) {
+            albums.add(APIConnector.getAlbum(song.albumID))
+        }
+        return albums.distinct()
     }
 }
