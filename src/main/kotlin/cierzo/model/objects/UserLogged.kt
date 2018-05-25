@@ -188,4 +188,31 @@ object UserLogged {
             throw Exception("User not logged")
         }
     }
+
+    /**
+     * Edit the basic information of the logged user.
+     */
+    public fun editUserInfo(username: String = "", name: String = "", bio: String = "") {
+        if (isLogged()) {
+            if (username.equals("") && name.equals("") && bio.equals("")) {
+                throw Exception("Nothing to edit")
+            } else if (!username.equals("") && name.equals("") && bio.equals("")) {
+                user!!.editInfo(username = username)
+            } else if (username.equals("") && !name.equals("") && bio.equals("")) {
+                user!!.editInfo(name = name)
+            } else if (username.equals("") && name.equals("") && !bio.equals("")) {
+                user!!.editInfo(bio = bio)
+            } else if (!username.equals("") && !name.equals("") && bio.equals("")) {
+                user!!.editInfo(username = username, name = name)
+            } else if (!username.equals("") && name.equals("") && !bio.equals("")) {
+                user!!.editInfo(username = username, bio = bio)
+            } else if (username.equals("") && !name.equals("") && !bio.equals("")) {
+                user!!.editInfo(name = name, bio = bio)
+            } else if (!username.equals("") && !name.equals("") && !bio.equals("")) {
+                user!!.editInfo(username = username, name = name, bio = bio)
+            }
+        } else {
+            throw Exception("User not logged")
+        }
+    }
 }

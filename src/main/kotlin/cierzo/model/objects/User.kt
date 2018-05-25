@@ -19,10 +19,10 @@ import io.swagger.client.model.ProfileItem
  *
  */
 class User(
-    var id: String,
-    var username: String,
-    var name: String,
-    var bio: String,
+    internal var id: String,
+    internal var username: String,
+    internal var name: String,
+    internal var bio: String,
     private val accountItem: AccountItem?,
     private var profileItem: ProfileItem?) {
 
@@ -173,5 +173,28 @@ class User(
     internal fun removeFriend(friendId: String) {
         APIConnector.removeFriend(friendId)
         updateStoredFriends()
+    }
+
+    /**
+     * Return the basic information of this user.
+     * Can be used in the application.
+     */
+    public fun getInfo(): Set<String> {
+        return setOf(id, username, name, bio)
+    }
+
+    /**
+     * Edit the basic information of this user with the parameters.
+     * User must be logged.
+     */
+    internal fun editInfo(username: String = this.username, name: String = this.name, bio: String = this.bio) {
+        try {
+            APIConnector.editUserInfo(username, name, bio)
+            this.username = username
+            this.name = name
+            this.bio = bio
+            } catch (e: Exception) {
+            throw e
+        }
     }
 }

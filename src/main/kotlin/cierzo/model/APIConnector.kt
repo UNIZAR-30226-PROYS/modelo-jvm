@@ -223,4 +223,15 @@ internal object APIConnector {
         var sessionItem: SessionItem = usersApi.restoreSession()
         return setOf(sessionItem.playlistID, sessionItem.second, sessionItem.songID)
     }
+
+    /**
+     * Edit the basic information of a user on the server.
+     */
+    internal fun editUserInfo(username: String, name: String, bio: String) {
+        var accountItem: AccountItemUpdate = AccountItemUpdate()
+        accountItem.bio = bio
+        accountItem.name = name
+        accountItem.username = username
+        usersApi.updateAccount(accountItem)
+    }
 }
