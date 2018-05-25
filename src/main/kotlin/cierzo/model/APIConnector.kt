@@ -244,4 +244,14 @@ internal object APIConnector {
         loginItem.pass = pass
         usersApi.updateAccountCredentials(loginItem)
     }
+
+    /**
+     * Edit the basic information of a playlist on the server.
+     */
+    internal fun editPlaylistInfo(playlistId: String, name: String, description: String) {
+        var playlistItemNew: PlaylistItemNew = PlaylistItemNew()
+        playlistItemNew.name = name
+        playlistItemNew.description = description
+        usersApi.updatePlaylist(playlistId, playlistItemNew)
+    }
 }

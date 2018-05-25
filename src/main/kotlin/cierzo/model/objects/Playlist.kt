@@ -18,14 +18,14 @@ import org.threeten.bp.LocalDate
  *
  */
 class Playlist(
-    var id: String,
-    var songs: MutableList<Song>,
-    var name: String,
+    internal val id: String,
+    internal var songs: MutableList<Song>,
+    internal var name: String,
     private var ownerId: String,
-    var description: String,
-    var date: LocalDate,
-    var imageURL: String,
-    var songAmount: Int
+    internal var description: String,
+    internal var date: LocalDate,
+    internal var imageURL: String,
+    internal var songAmount: Int
 ) {
 
     constructor(playlistItem: PlaylistItem): this(
@@ -119,4 +119,36 @@ class Playlist(
         }
         return albums.distinct()
     }
+
+    /**
+     * Edit the basic information of the playlist with the parameters.
+     * Only available for users who owns this playlist. Should be called only from an User object.
+     */
+    internal fun editInfo(name: String = this.name, description: String = this.description) {
+        try {
+            APIConnector.editPlaylistInfo(id, name, description)
+            this.name = name
+            this.description = description
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    /**
+     * Get the information of this playlist as a Set of id:String (0), name:String (1), description:String (2),
+     * date:LocalDate (3), imageURL:String (4), songAmount:Int (5).
+     * Can be called from the application.
+     */
+    public fun getInfo(): Set<Any> {
+        return setOf(id, name, description, date, imageURL, songAmount)
+    }
+
+    /**
+     * Get songs of this playlist
+     * Can be called from the application.
+     */
+    public fun getSongs(): List<Song> {
+        return songs
+    }
+
 }

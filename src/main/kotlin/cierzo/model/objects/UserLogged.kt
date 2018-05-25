@@ -4,7 +4,7 @@ import io.swagger.client.ApiException
 import io.swagger.client.model.AccountItem
 
 object UserLogged {
-    var user: User? = null
+    internal var user: User? = null
 
     /**
      * Return true if there are an user logged
@@ -222,6 +222,17 @@ object UserLogged {
     public fun editCredentials(mail: String, pass: String) {
         if (isLogged()) {
             user!!.editCredentials(mail, pass)
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
+    /**
+     * Edit the basic information of a playlist that logged user owns.
+     */
+    public fun editPlaylistInfo(name: String = "", description: String = "") {
+        if (isLogged()) {
+            user!!.editPlaylistInfo(name, description)
         } else {
             throw Exception("User not logged")
         }

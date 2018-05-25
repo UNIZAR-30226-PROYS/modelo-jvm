@@ -18,16 +18,16 @@ import java.io.File
  *
  */
 class Song (
-    var id: String,
-    var name: String,
-    var authorID: String,
-    var authorName: String,
-    var albumID: String,
-    var albumName: String,
-    var length: String,
-    var genre: List<String>,
-    var imageURL: String,
-    var fileURL: String
+    val id: String,
+    val name: String,
+    val authorID: String,
+    val authorName: String,
+    val albumID: String,
+    val albumName: String,
+    val length: String,
+    val genre: List<String>,
+    val imageURL: String,
+    val fileURL: String
 ) {
 
     constructor(songItem: SongItem) : this(

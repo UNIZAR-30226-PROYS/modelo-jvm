@@ -18,14 +18,14 @@ import org.threeten.bp.LocalDate
  *
  */
 class Album (
-    var id: String,
-    var songs: List<Song>,
-    var name: String,
-    var authorId: String,
-    var authorName: String,
-    var imageURL: String,
-    var desc: String,
-    var date: LocalDate
+    val id: String,
+    val songs: List<Song>,
+    val name: String,
+    val authorId: String,
+    val authorName: String,
+    val imageURL: String,
+    val desc: String,
+    val date: LocalDate
 ){
     constructor(albumItem: AlbumItem) : this(
             id = albumItem.id,

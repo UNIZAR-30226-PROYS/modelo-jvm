@@ -19,7 +19,7 @@ import io.swagger.client.model.ProfileItem
  *
  */
 class User(
-    internal var id: String,
+    internal val id: String,
     internal var username: String,
     internal var name: String,
     internal var bio: String,
@@ -176,7 +176,7 @@ class User(
     }
 
     /**
-     * Return the basic information of this user.
+     * Return the basic information of this user as a Set of id (0), username (1), name (2) and bio (3).
      * Can be used in the application.
      */
     public fun getInfo(): Set<String> {
@@ -204,5 +204,27 @@ class User(
      */
     internal fun editCredentials(mail: String, pass: String) {
         APIConnector.editUserCredentials(mail, pass)
+    }
+
+    /**
+     * Edit the basic information of a playlist that this user owns.
+     * User must be logged.
+     */
+    internal fun editPlaylistInfo(playlistId: String, name: String = "", description: String = "") {
+        for (playlist in storedPlaylists) {
+            if (playlist.id == playlistId) {
+                if (name.equals("") && description.equals("")) {
+                    throw Exception("Nothing to edit")
+                } else if (!name.equals("") && description.equals("")) {
+                    playlist.editInfo(name = name)
+                } else if (name.equals("") && !description.equals("")) {
+                    playlist.editInfo(description = description)
+                } else if (!name.equals("") && !description.equals("")) {
+                    playlist.editInfo(name = name, description = description)
+                }
+                return
+            }
+        }
+        throw Exception("Playlist not found or user doesn't own it.")
     }
 }

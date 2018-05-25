@@ -13,11 +13,11 @@ import io.swagger.client.model.AuthorItem
  * @param imageURL: Direccion de la imagen
  */
 class Author(
-    var id: String,
-    var name: String,
-    var bio: String,
-    var albums: List<Album>,
-    var imageURL: String
+    val id: String,
+    val name: String,
+    val bio: String,
+    val albums: List<Album>,
+    val imageURL: String
 ) {
     constructor(authorItem: AuthorItem) : this(
             id = authorItem.id,
