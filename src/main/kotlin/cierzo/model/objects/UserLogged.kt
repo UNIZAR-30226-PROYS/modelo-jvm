@@ -166,4 +166,26 @@ object UserLogged {
             throw Exception("User not logged")
         }
     }
+
+    /**
+     * Save the current session (if is a session) on the server.
+     */
+    public fun saveSession() {
+        if (isLogged()) {
+            Session.saveSession()
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
+    /**
+     * Restore the session saved on the server
+     */
+    public fun restoreSession() {
+        if (isLogged()) {
+            Session.restoreSession()
+        } else {
+            throw Exception("User not logged")
+        }
+    }
 }

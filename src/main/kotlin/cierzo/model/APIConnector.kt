@@ -204,4 +204,23 @@ internal object APIConnector {
     internal fun removeSong(playlistId: String, songId: String) {
         usersApi.deletePlaylistSong(playlistId, songId)
     }
+
+    /**
+     * Saves the current session on the server
+     */
+    internal fun saveSession(playlistId: String, second: String, songId: String) {
+        var session: SessionItem = SessionItem()
+        session.playlistID = playlistId
+        session.second = second
+        session.songID = songId
+        usersApi.saveSession(session)
+    }
+
+    /**
+     * Get the saved session from the server in a Set with playlistID (0), second (1) and songID (2).
+     */
+    internal fun getSession(): Set<String> {
+        var sessionItem: SessionItem = usersApi.restoreSession()
+        return setOf(sessionItem.playlistID, sessionItem.second, sessionItem.songID)
+    }
 }
