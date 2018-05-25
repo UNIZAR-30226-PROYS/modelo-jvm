@@ -26,9 +26,12 @@ class User(
     private val accountItem: AccountItem?,
     private var profileItem: ProfileItem?) {
 
-    var storedPlaylists: MutableList<Playlist> = mutableListOf()
-    var storedFriends: MutableList<User> = mutableListOf()
+    private var storedPlaylists: MutableList<Playlist> = mutableListOf()
+    private var storedFriends: MutableList<User> = mutableListOf()
 
+    /**
+     * Constructor with an AccountItem. Used when this user login.
+     */
     constructor(accountItem: AccountItem) : this(
         id = accountItem.id,
         username = accountItem.username,
@@ -37,6 +40,9 @@ class User(
         accountItem = accountItem,
         profileItem = null)
 
+    /**
+     * Constructor with a FriendItem. Used when this user is created as friend of other.
+     */
     constructor(friendItem: FriendItem) : this(
         id = friendItem.id,
         username = friendItem.username,
@@ -45,6 +51,9 @@ class User(
         accountItem = null,
         profileItem = null)
 
+    /**
+     * Constructor with a ProfileItem. Used when this user is created from a profile search.
+     */
     constructor(profileItem: ProfileItem) : this(
         id = profileItem.id,
         username = profileItem.username,
@@ -53,7 +62,11 @@ class User(
         accountItem = null,
         profileItem = profileItem)
 
-    fun getFriends(): List<User> {
+    /**
+     * Return a list (not mutable) of all the friends (as User) of this user.
+     * Can be called from the application.
+     */
+    public fun getFriends(): List<User> {
         if (storedFriends.isEmpty()) {
             storedFriends = if (accountItem != null) {
                 ItemArrayConverter.userFromFriend(accountItem.friends)
@@ -67,7 +80,11 @@ class User(
         return storedFriends.toList()
     }
 
-    fun getPlaylists(): List<Playlist> {
+    /**
+     * Return a list (not mutable) of all the playlist (as Playlist) of this user.
+     * Can be called from the application.
+     */
+    public fun getPlaylists(): List<Playlist> {
         if (storedPlaylists.isEmpty()) {
             storedPlaylists = if (accountItem != null) {
                 ItemArrayConverter.playlistFromPlaylist(accountItem.playlists)
@@ -81,30 +98,78 @@ class User(
         return storedPlaylists.toList()
     }
 
+    /**
+     * Update from the server the playlists of this user.
+     * Used when the playlist id is unknown and need to be added or when the id is know, need to be removed, but unknown
+     * the index.
+     */
     private fun updateStoredPlaylists() {
         storedPlaylists = ItemArrayConverter.playlistFromPlaylist(
                 APIConnector.searchPlaylists(ownerUsername = username))
     }
 
+    /**
+     * Update from the server the friends of this user.
+     * Used when the friend id is unknown and need to be added or when the id is know, need to be removed, but unknown
+     * the index.
+     */
     private fun updateStoredFriends() {
         storedFriends = APIConnector.getUser(id).getFriends().toMutableList()
     }
 
+    /**
+     * Add a new playlist (on server) and reload the stored playlists.
+     * User must be logged to use this.
+     */
     internal fun newPlaylist(name: String, desc: String) {
         APIConnector.newPlaylist(name, desc)
         updateStoredPlaylists()
     }
 
-    internal fun removePlaylist(index: Int) {
+    /**
+     * Remove a playlist from server and stored playlists list using the index of the stored playlists list.
+     * Use with caution: Procure that the list haven't been reorder.
+     * User must be logged to use this.
+     */
+    internal fun removePlaylistAt(index: Int) {
         storedPlaylists[index].removeThis()
         storedPlaylists.removeAt(index)
     }
 
-    internal fun newFriend(friendId: String) {
-        APIConnector.newFriend(friendId)
-        updateStoredFriends()
+    /**
+     * Remove a playlist from the server and reload the stored playlist list.
+     * Use with caution: All user playlist must be downloaded again.
+     * User must be logged to use this.
+     */
+    internal fun removePlaylist(playlistId: String) {
+        APIConnector.removePlaylist(playlistId)
+        updateStoredPlaylists()
     }
 
+    /**
+     * Add a new friend (on server) and download and save it profile (as User) on the stored friends list.
+     * User must be logged to use this.
+     */
+    internal fun newFriend(friendId: String) {
+        APIConnector.newFriend(friendId)
+        storedFriends.add(User(APIConnector.getProfileItem(friendId)))
+    }
+
+    /**
+     * Remove a friend from server and stored friends list using the index of the stored friends list.
+     * Use with caution: Procure that the list haven't been reorder.
+     * User must be logged to use this.
+     */
+    internal fun removeFriendAt(index: Int) {
+        APIConnector.removeFriend(storedFriends[index].id)
+        storedFriends.removeAt(index)
+    }
+
+    /**
+     * Remove a friend from the server and reload the stored friends list.
+     * Use with caution: All user data (including playlist, but they aren't updated) must be downloaded again.
+     * User must be logged to use this.
+     */
     internal fun removeFriend(friendId: String) {
         APIConnector.removeFriend(friendId)
         updateStoredFriends()

@@ -1,6 +1,7 @@
 package cierzo.model.objects
 
 import cierzo.model.APIConnector
+import io.swagger.client.ApiClient
 import io.swagger.client.model.SongItem
 import java.io.File
 
@@ -38,8 +39,8 @@ class Song (
             albumName = songItem.albumName,
             length = songItem.lenght,
             genre = songItem.genre,
-            imageURL = "http://localhost:8080/api/songs/${songItem.id}/image",
-            fileURL = "http://localhost:8080/api/songs/${songItem.id}/file")
+            imageURL = "${ApiClient.basePath}/api/songs/${songItem.id}/image",
+            fileURL = "${ApiClient.basePath}/api/songs/${songItem.id}/file")
 
 
 }

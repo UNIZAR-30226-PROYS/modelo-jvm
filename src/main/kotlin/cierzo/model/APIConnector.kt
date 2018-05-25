@@ -13,7 +13,7 @@ import java.net.CookieHandler
 
 
 
-object APIConnector {
+internal object APIConnector {
     private var apiClient: ApiClient = ApiClient()
     private var publicApi: PublicApi
     private var adminsApi: AdminsApi
@@ -25,6 +25,9 @@ object APIConnector {
         usersApi = UsersApi(apiClient)
     }
 
+    /**
+     * Return a list (mutable) from server of songs (as SongItem) that match with the parameters.
+     */
     internal fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 0,
                     limit: Int = 1): MutableList<SongItem> {
         return try {
@@ -34,6 +37,9 @@ object APIConnector {
         }
     }
 
+    /**
+     * Return a list (mutable) from server of user profiles (as ProfileItem) that match with the parameters.
+     */
     internal fun searchProfiles(name: String = "", username: String = "", skip: Int = 0, limit: Int = 1)
             : MutableList<ProfileItem> {
         return try {
@@ -43,6 +49,9 @@ object APIConnector {
         }
     }
 
+    /**
+     * Return a list (mutable) from server of playlists (as PlaylistItem) that match with the parameters.
+     */
     internal fun searchPlaylists(name: String = "", ownerUsername: String = "", skip: Int = 0, limit: Int = 1)
             : MutableList<PlaylistItem> {
         return try {
@@ -53,9 +62,33 @@ object APIConnector {
     }
 
     /**
-     * Get a Playlist from the server.
+     * Return a list (mutable) from server of albums (as AlbumItem) that match with the parameters.
      */
-    fun getPlaylist(playlistID: Int): Playlist {
+    internal fun searchAlbums(name: String = "", author: String = "", skip: Int = 0, limit: Int = 1):
+            MutableList<AlbumItem> {
+        return try {
+            publicApi.searchAlbum(name, author, skip, limit)
+        } catch (e: ApiException) {
+            throw e
+        }
+    }
+
+    /**
+     * Return a list (mutable) from server of authors (as AuthorItem) that match with the parameters.
+     */
+    internal fun searchAuthors(name: String = "", skip: Int = 0, limit: Int = 1):
+            MutableList<AuthorItem> {
+        return try {
+            publicApi.searchAuthors(name, skip, limit)
+        } catch (e: ApiException) {
+            throw e
+        }
+    }
+
+    /**
+     * Return a playlist (as Playlist) from server with a specific id.
+     */
+    internal fun getPlaylist(playlistID: Int): Playlist {
         try {
             return Playlist(publicApi.getPlaylist(playlistID.toString()))
         } catch (e: ApiException) {
@@ -64,7 +97,7 @@ object APIConnector {
     }
 
     /**
-     * Do login and create the profile
+     * Do log in and add the user to UserLogged.
      */
     internal fun login(mail: String, pass: String) {
         var loginItem: LoginItem = LoginItem()
@@ -83,6 +116,9 @@ object APIConnector {
         }
     }
 
+    /**
+     * Do log out and remove the user from UserLogged.
+     */
     internal fun logout() {
         if (UserLogged.isLogged()) {
             try {
@@ -96,18 +132,44 @@ object APIConnector {
         }
     }
 
+    /**
+     * Get from server a profile (as ProfileItem) with a specific id.
+     */
     internal fun getProfileItem(profileId: String): ProfileItem {
         return publicApi.getProfile(profileId)
     }
 
+    /**
+     * Get from server a user (as User) with a specific id.
+     */
     internal fun getUser(userId: String): User {
         return User(publicApi.getProfile(userId))
     }
 
+    /**
+     * Get from server a author (as Author) with a specific id.
+     */
+    internal fun getAuthor(authorId: String): Author {
+        return Author(publicApi.getAuthor(authorId))
+    }
+
+    /**
+     * Get from server a album (as Album) with a specific id.
+     */
+    internal fun getAlbum(albumId: String): Album {
+        return Album(publicApi.getAlbum(albumId))
+    }
+
+    /**
+     * Delete from server a playlist with a specific id.
+     */
     internal fun removePlaylist(playlistId: String) {
         usersApi.deletePlaylist(playlistId)
     }
 
+    /**
+     * Add to the server a new playlist with a specific name and description.
+     */
     internal fun newPlaylist(name: String, desc: String) {
         var playlistItem = PlaylistItemNew()
         playlistItem.name = name
@@ -115,37 +177,31 @@ object APIConnector {
         usersApi.addPlaylist(playlistItem)
     }
 
+    /**
+     * Make the user logged to follow other user with a specific id.
+     */
     internal fun newFriend(friendId: String) {
         usersApi.followProfile(friendId)
     }
 
+    /**
+     * Make the user logged to unfollow other user with a specific id.
+     */
     internal fun removeFriend(friendId: String) {
         usersApi.unfollowProfile(friendId)
     }
 
+    /**
+     * Add on the server a new song with a specefic id to a existing playlist with a specific id.
+     */
     internal fun addSong(playlistId: String, songId: String) {
         usersApi.addPlaylistSong(playlistId, songId)
     }
 
+    /**
+     * Delete from server a song with a specefic id of a existing playlist with a specific id.
+     */
     internal fun removeSong(playlistId: String, songId: String) {
         usersApi.deletePlaylistSong(playlistId, songId)
     }
-
-    internal fun getAuthor(authorId: String): Author {
-        return Author(publicApi.getAuthor(authorId))
-    }
-
-    internal fun getAlbum(albumId: String): Album {
-        return Album(publicApi.getAlbum(albumId))
-    }
-
-    /*fun getSongInfo(songID: String): SongItem? {
-        return try {
-            //publicApi.getSong(songID)
-            SongItem("123456789","I Will Survive","03:05", "4567", "Gloria Gaynor",
-                    "9876", "Allenrok", listOf("rock"))
-        } catch (e: ApiException) {
-            null
-        }
-    }*/
 }

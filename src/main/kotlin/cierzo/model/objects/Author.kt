@@ -1,6 +1,7 @@
 package cierzo.model.objects
 
 import cierzo.model.ItemArrayConverter
+import io.swagger.client.ApiClient
 import io.swagger.client.model.AuthorItem
 
 /**
@@ -23,6 +24,6 @@ class Author(
             name = authorItem.name,
             bio = authorItem.bio,
             albums = ItemArrayConverter.albumFromAlbum(authorItem.albums),
-            imageURL = "http://localhost:8080/api/authors/${authorItem.id}/image"
+            imageURL = "${ApiClient.basePath}/authors/${authorItem.id}/image"
     )
 }

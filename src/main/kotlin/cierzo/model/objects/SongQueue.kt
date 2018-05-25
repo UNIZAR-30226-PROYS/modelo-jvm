@@ -1,5 +1,7 @@
 package cierzo.model.objects
 
+@Deprecated("Future implementation will use MediaLibrary on Android or other implementation in other" +
+        "platforms")
 object SongQueue {
     var playingSongs: MutableList<Song> = mutableListOf()
     var originalPlaylist: MutableList<Song> = mutableListOf()

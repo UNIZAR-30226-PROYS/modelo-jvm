@@ -41,7 +41,11 @@ class Playlist(
         songAmount = songs.size
     }
 
-    fun getOwner(): User {
+    /**
+     * Returns the user (as User) that owns the playlist. Replace getter for ownerId.
+     * Can be called from the application.
+     */
+    public fun getOwner(): User {
         return if (ownerId.equals(UserLogged.user?.id)) {
             UserLogged.user!!
         } else {
@@ -49,7 +53,11 @@ class Playlist(
         }
     }
 
-    fun addSong(song: Song) {
+    /**
+     * Add a new song to the playlist.
+     * Only available for users who owns this playlist. Should be called only from an User object.
+     */
+    internal fun addSong(song: Song) {
         try {
             APIConnector.addSong(id, song.id)
             songs.add(song)
@@ -59,7 +67,11 @@ class Playlist(
 
     }
 
-    fun removeSong(index: Int) {
+    /**
+     * Remove a song from the playlist.
+     * Only available for users who owns this playlist. Should be called only from an User object.
+     */
+    internal fun removeSong(index: Int) {
         try {
             APIConnector.removeSong(id, songs[index].id)
             songs.removeAt(index)
@@ -68,15 +80,27 @@ class Playlist(
         }
     }
 
-    fun reorder(index1: Int, index2: Int) {
+    /**
+     * Swap the position of two songs in the playlist.
+     * Only available for users who owns this playlist. Should be called only from an User object.
+     */
+    internal fun reorder(index1: Int, index2: Int) {
         songs[index1] = songs[index2].also { songs[index2] = songs[index1] }
     }
 
+    /**
+     * Remove this playlist from the server.
+     * Only available for users who owns this playlist. Should be called only from an User object.
+     */
     internal fun removeThis() {
         APIConnector.removePlaylist(id)
     }
 
-    fun getAuthors(): List<Author> {
+    /**
+     * Returns a list (not mutable) of all authors (as Author) on this playlist. Without repeating authors.
+     * Can be called from the application.
+     */
+    public fun getAuthors(): List<Author> {
         var authors: MutableList<Author> = mutableListOf()
         for (song in songs) {
             authors.add(APIConnector.getAuthor(song.authorID))
@@ -84,7 +108,11 @@ class Playlist(
         return authors.distinct()
     }
 
-    fun getAlbums(): List<Album> {
+    /**
+     * Return a list (not mutable) of all albums (as Album) on this playlist. Without repeating albums.
+     * Can be called from the application.
+     */
+    public fun getAlbums(): List<Album> {
         var albums: MutableList<Album> = mutableListOf()
         for (song in songs) {
             albums.add(APIConnector.getAlbum(song.albumID))

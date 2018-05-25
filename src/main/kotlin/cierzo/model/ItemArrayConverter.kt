@@ -3,7 +3,12 @@ package cierzo.model
 import cierzo.model.objects.*
 import io.swagger.client.model.*
 
-object ItemArrayConverter {
+/**
+ * A ser of functions used to convert lists of "objectItem" to lists of "object".
+ * The name express first the name of the objects in the returned list and second the name of the objectItem.
+ * Example: "songFromSongs" return a list of Song from a list of SongItem.
+ */
+internal object ItemArrayConverter {
     fun songFromSongs(songItems: MutableList<SongItem>): MutableList<Song> {
         var songList: MutableList<Song> = mutableListOf()
         for (songItem in songItems) {

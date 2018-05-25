@@ -1,6 +1,7 @@
 package cierzo.model.objects
 
 import cierzo.model.ItemArrayConverter
+import io.swagger.client.ApiClient.basePath
 import io.swagger.client.model.AlbumItem
 import org.threeten.bp.LocalDate
 
@@ -32,7 +33,7 @@ class Album (
             name = albumItem.name,
             authorId = albumItem.authorID,
             authorName = albumItem.authorName,
-            imageURL = "http://localhost:8080/api/albums/${albumItem.id}/image",
+            imageURL = "$basePath/albums/${albumItem.id}/image",
             desc = albumItem.description,
             date = albumItem.publishDate
     )
