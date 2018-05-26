@@ -6,11 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dfcd17d-bf17-40cf-ae59-b6e8bd37cd0f" name="Default" comment="1.10.0 - Vuelve a ser posible obtener el objeto User del usuario logueado&#10;+ Bug Fixes">
+    <list default="true" id="2dfcd17d-bf17-40cf-ae59-b6e8bd37cd0f" name="Default" comment="beta_1.0.2 - Bug fixes (UserLogged, Song imageURL, Song fileURL)&#10;- getUser() es ahora público, como debería haberlo sido.&#10;- imageURL y fileURL en Song usan la ruta correcta.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/APIConnector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/APIConnector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Playlist.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Playlist.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -33,10 +32,23 @@
       <file leaf-file-name="APIConnector.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/APIConnector.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
+            <state relative-caret-position="255">
+              <caret line="123" column="16" lean-forward="true" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="56" column="42" lean-forward="true" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
               <folding>
-                <element signature="e#22#391#0" expanded="true" />
+                <element signature="e#1712#1728#0" expanded="true" />
+                <element signature="e#15125#15131#0" expanded="true" />
+                <element signature="e#15919#15925#0" expanded="true" />
+                <element signature="e#20380#20410#0" expanded="true" />
+                <element signature="e#27468#27498#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +57,8 @@
       <file leaf-file-name="Album.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Album.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+            <state relative-caret-position="385">
+              <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
               <folding>
                 <element signature="e#30#186#0" expanded="true" />
               </folding>
@@ -57,26 +69,26 @@
       <file leaf-file-name="Author.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Author.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state relative-caret-position="221">
+              <caret line="15" selection-start-line="15" selection-end-line="19" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Playlist.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Playlist.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Playlist.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="2091">
+              <caret line="148" column="42" lean-forward="true" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Song.kt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Song.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+            <state relative-caret-position="204">
+              <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -84,8 +96,8 @@
       <file leaf-file-name="Session.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Session.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+            <state relative-caret-position="113">
+              <caret line="25" column="43" selection-start-line="22" selection-start-column="8" selection-end-line="25" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -93,8 +105,8 @@
       <file leaf-file-name="Facade.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/Facade.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="89" column="15" lean-forward="true" selection-start-line="89" selection-start-column="15" selection-end-line="89" selection-end-column="15" />
+            <state relative-caret-position="1343">
+              <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="85" selection-end-column="80" />
               <folding>
                 <element signature="e#22#194#0" expanded="true" />
               </folding>
@@ -105,8 +117,8 @@
       <file leaf-file-name="User.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+            <state relative-caret-position="3281">
+              <caret line="197" column="19" lean-forward="true" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -114,8 +126,8 @@
       <file leaf-file-name="UserLogged.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
               <folding>
                 <element signature="e#30#110#0" expanded="true" />
               </folding>
@@ -480,15 +492,15 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/ItemArrayConverter.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Album.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Author.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Session.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/Facade.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/Tests.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/APIConnector.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Playlist.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java" />
       </list>
     </option>
   </component>
@@ -512,7 +524,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -552,6 +563,15 @@
               <item name="modelo-jvm" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="modelo-jvm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="modelo-jvm" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -575,6 +595,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -676,7 +697,8 @@
       <workItem from="1527175031639" duration="20009000" />
       <workItem from="1527255505611" duration="14695000" />
       <workItem from="1527285130936" duration="6489000" />
-      <workItem from="1527291786097" duration="10204000" />
+      <workItem from="1527291786097" duration="13327000" />
+      <workItem from="1527352001300" duration="5983000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0 - Implementado login, logout y UserLogged&#10;login: inicia sesión y guarda en UserLogged el perfil del usuario.&#10;logout: cierra la sesión y elimina el perfil del usuario en UserLogged.&#10;UserLogged: guarda el objeto User del usuario que ha iniciado sesión.&#10;NOTA: Aplicaciones que utilicen las versiones 0.x.x no son compatibles.">
       <created>1527187583026</created>
@@ -748,11 +770,18 @@
       <option name="project" value="LOCAL" />
       <updated>1527330877938</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="1.10.0 - Vuelve a ser posible obtener el objeto User del usuario logueado&#10;+ Bug Fixes">
+      <created>1527336182286</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1527336182295</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51397000" />
+    <option name="totallyTimeSpent" value="60503000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
@@ -760,7 +789,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.32988358" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32988358" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -772,7 +801,7 @@
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.24945135" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.24945135" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
@@ -816,13 +845,41 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3043">
+          <caret line="179" column="7" selection-start-line="179" selection-start-column="7" selection-end-line="182" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4233">
+          <caret line="250" column="76" selection-start-line="248" selection-start-column="7" selection-end-line="250" selection-end-column="76" />
+          <folding>
+            <element signature="e#30#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
+          <folding>
+            <element signature="e#1712#1728#0" expanded="true" />
+            <element signature="e#15125#15131#0" expanded="true" />
+            <element signature="e#15919#15925#0" expanded="true" />
+            <element signature="e#20380#20410#0" expanded="true" />
+            <element signature="e#27468#27498#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/APIConnector.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-          <folding>
-            <element signature="e#22#391#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,13 +952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="56" column="42" lean-forward="true" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
-          <folding>
-            <element signature="e#1698#1714#0" expanded="true" />
-            <element signature="e#15111#15117#0" expanded="true" />
-            <element signature="e#15905#15911#0" expanded="true" />
-            <element signature="e#20366#20396#0" expanded="true" />
-            <element signature="e#27454#27484#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1079,55 +1129,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
-          <folding>
-            <element signature="e#1698#1714#0" expanded="true" />
-            <element signature="e#15111#15117#0" expanded="true" />
-            <element signature="e#15905#15911#0" expanded="true" />
-            <element signature="e#20366#20396#0" expanded="true" />
-            <element signature="e#27454#27484#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Album.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding>
-            <element signature="e#30#186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Author.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Session.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/Tests.kt" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/Facade.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="89" column="15" lean-forward="true" selection-start-line="89" selection-start-column="15" selection-end-line="89" selection-end-column="15" />
+        <state relative-caret-position="1343">
+          <caret line="83" column="3" selection-start-line="83" selection-start-column="3" selection-end-line="85" selection-end-column="80" />
           <folding>
             <element signature="e#22#194#0" expanded="true" />
           </folding>
@@ -1136,45 +1142,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/APIConnector.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
-          <folding>
-            <element signature="e#22#391#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="123" column="16" lean-forward="true" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3281">
+          <caret line="197" column="19" lean-forward="true" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/UserLogged.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
           <folding>
             <element signature="e#30#110#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/Tests.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/client/ApiClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        <state relative-caret-position="323">
+          <caret line="56" column="42" lean-forward="true" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
           <folding>
-            <element signature="e#22#219#0" expanded="true" />
+            <element signature="e#1712#1728#0" expanded="true" />
+            <element signature="e#15125#15131#0" expanded="true" />
+            <element signature="e#15919#15925#0" expanded="true" />
+            <element signature="e#20380#20410#0" expanded="true" />
+            <element signature="e#27468#27498#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/User.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Album.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        <state relative-caret-position="385">
+          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding>
+            <element signature="e#30#186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Author.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" selection-start-line="15" selection-end-line="19" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Playlist.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="2091">
+          <caret line="148" column="42" lean-forward="true" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Session.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="25" column="43" selection-start-line="22" selection-start-column="8" selection-end-line="25" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/cierzo/model/objects/Song.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
         </state>
       </provider>
     </entry>

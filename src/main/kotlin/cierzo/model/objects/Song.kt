@@ -39,8 +39,8 @@ class Song (
             albumName = songItem.albumName,
             length = songItem.lenght,
             genre = songItem.genre,
-            imageURL = "${ApiClient.basePath}/api/songs/${songItem.id}/image",
-            fileURL = "${ApiClient.basePath}/api/songs/${songItem.id}/file")
+            imageURL = "${ApiClient.basePath}/songs/${songItem.id}/image",
+            fileURL = "${ApiClient.basePath}/songs/${songItem.id}/file")
 
 
 }

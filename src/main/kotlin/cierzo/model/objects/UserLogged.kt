@@ -28,7 +28,7 @@ class UserLogged private constructor() {
     /**
      * Return the logged user (as User)
      */
-    internal fun getUser(): User {
+    public fun getUser(): User {
         return if (isLogged()) {
             user!!
         } else {
@@ -176,7 +176,6 @@ class UserLogged private constructor() {
     /**
      * Remove a friend from the server and reload the stored friends list.
      * Use with caution: All user data (including playlist, but they aren't updated) must be downloaded again.
-     * User must be logged to use this.
      */
     public fun removeFriend(friendId: String) {
         if (isLogged()) {
