@@ -15,7 +15,7 @@ Modelo-jvm requiere de las siguientes dependencias (para Gradle) para funcionar:
 
 # Uso en Android
 ## Importar
-Para usar modelo-jvm en el desarrollo de una aplicación Android es necesario añadir las dependencias a Gradle y el archivo .JAR que se publica en "releases" a la carpeta "libs" (en el mismo directorio que "src"). Recuerda añadir la dependencia del .JAR en Gradle también:
+Para usar modelo-jvm en el desarrollo de una aplicación Android es necesario añadir las dependencias a Gradle y el archivo .JAR que se publica en "releases" (https://github.com/UNIZAR-30226-2018-05/modelo-jvm/releases) a la carpeta "libs" (en el mismo directorio que "src"). Recuerda añadir la dependencia del .JAR en Gradle también:
 
     implementation files('libs/modelo-jvm.jar')
     
