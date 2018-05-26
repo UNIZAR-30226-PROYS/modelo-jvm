@@ -44,8 +44,8 @@ import io.swagger.client.auth.OAuth;
 public class ApiClient {
 
     public static String basePath = "http://192.168.1.53:8080/api"; // Roberto
-    //private String basePath = "http://192.168.0.160:8080/api"; // Jose Felix
-    //private String basePath = "http://localhost:8080/api"; // Localhost
+    //public static String basePath = "http://192.168.0.157:8080/api"; // Jose Felix
+    //public static String basePath = "http://localhost:8080/api"; // Localhost
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;

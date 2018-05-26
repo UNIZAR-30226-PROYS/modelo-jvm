@@ -10,7 +10,7 @@ import io.swagger.client.api.UsersApi
 import io.swagger.client.model.*
 import sun.java2d.cmm.Profile
 import java.net.CookieHandler
-
+import kotlin.math.sign
 
 
 internal object APIConnector {
@@ -129,6 +129,26 @@ internal object APIConnector {
             }
         } else {
             throw Exception("No user logged")
+        }
+    }
+
+    /**
+     * Register a new account on server
+     */
+    internal fun signup(mail: String, name: String, username: String, pass: String) {
+        if (!UserLogged.isLogged()) {
+            try {
+                var signUpItem: SignUpItem = SignUpItem()
+                signUpItem.mail = mail
+                signUpItem.username = username
+                signUpItem.pass = pass
+                signUpItem.name = name
+                publicApi.createAccount(signUpItem)
+            } catch (e: ApiException) {
+                throw e
+            }
+        } else {
+            throw Exception("A user is already logged")
         }
     }
 

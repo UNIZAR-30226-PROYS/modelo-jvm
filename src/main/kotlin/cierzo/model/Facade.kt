@@ -35,6 +35,19 @@ fun logout(): Boolean {
 }
 
 /**
+ * Sign up a new account
+ */
+fun signup(mail: String, name: String, username: String, pass: String) {
+    try {
+        APIConnector.signup(mail, name, username, pass)
+    } catch (e: ApiException) {
+        throw e
+    } catch (e: Exception) {
+        throw e
+    }
+}
+
+/**
  * Return a list (not mutable) from server of users (as User) that match with the parameters.
  */
 fun searchUsers(name: String = "", username: String = "", skip: Int = 0, limit: Int = 1): List<User> {

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="modelo-jvm">
+    <output-path>$PROJECT_DIR$/out/artifacts/modelo_jvm</output-path>
+    <root id="archive" name="modelo-jvm.jar">
+      <element id="module-output" name="modelo-jvm_main" />
+    </root>
+  </artifact>
+</component>
