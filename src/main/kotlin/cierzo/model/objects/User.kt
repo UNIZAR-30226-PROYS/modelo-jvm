@@ -36,7 +36,7 @@ class User(
         id = accountItem.id,
         username = accountItem.username,
         name = accountItem.name,
-        bio = accountItem.bio,
+        bio = accountItem.bio ?: "",
         accountItem = accountItem,
         profileItem = null)
 
@@ -47,7 +47,7 @@ class User(
         id = friendItem.id,
         username = friendItem.username,
         name = friendItem.name,
-        bio = friendItem.bio,
+        bio = friendItem.bio ?: "",
         accountItem = null,
         profileItem = null)
 
@@ -58,7 +58,7 @@ class User(
         id = profileItem.id,
         username = profileItem.username,
         name = profileItem.name,
-        bio = profileItem.bio,
+        bio = profileItem.bio ?: "",
         accountItem = null,
         profileItem = profileItem)
 
@@ -73,7 +73,7 @@ class User(
             } else if (profileItem != null) {
                 ItemArrayConverter.userFromFriend(profileItem!!.friends)
             } else {
-                profileItem = APIConnector.getProfileItem(id)
+                profileItem = APIConnector.getInstance().getProfileItem(id)
                 ItemArrayConverter.userFromFriend(profileItem!!.friends)
             }
         }
@@ -91,7 +91,7 @@ class User(
             } else if (profileItem != null) {
                 ItemArrayConverter.playlistFromPlaylist(profileItem!!.playlists)
             } else {
-                profileItem = APIConnector.getProfileItem(id)
+                profileItem = APIConnector.getInstance().getProfileItem(id)
                 ItemArrayConverter.playlistFromPlaylist(profileItem!!.playlists)
             }
         }
@@ -105,7 +105,7 @@ class User(
      */
     private fun updateStoredPlaylists() {
         storedPlaylists = ItemArrayConverter.playlistFromPlaylist(
-                APIConnector.searchPlaylists(ownerUsername = username))
+                APIConnector.getInstance().searchPlaylists(ownerUsername = username))
     }
 
     /**
@@ -114,7 +114,7 @@ class User(
      * the index.
      */
     private fun updateStoredFriends() {
-        storedFriends = APIConnector.getUser(id).getFriends().toMutableList()
+        storedFriends = APIConnector.getInstance().getUser(id).getFriends().toMutableList()
     }
 
     /**
@@ -122,7 +122,7 @@ class User(
      * User must be logged to use this.
      */
     internal fun newPlaylist(name: String, desc: String) {
-        APIConnector.newPlaylist(name, desc)
+        APIConnector.getInstance().newPlaylist(name, desc)
         updateStoredPlaylists()
     }
 
@@ -142,7 +142,7 @@ class User(
      * User must be logged to use this.
      */
     internal fun removePlaylist(playlistId: String) {
-        APIConnector.removePlaylist(playlistId)
+        APIConnector.getInstance().removePlaylist(playlistId)
         updateStoredPlaylists()
     }
 
@@ -151,8 +151,8 @@ class User(
      * User must be logged to use this.
      */
     internal fun newFriend(friendId: String) {
-        APIConnector.newFriend(friendId)
-        storedFriends.add(User(APIConnector.getProfileItem(friendId)))
+        APIConnector.getInstance().newFriend(friendId)
+        storedFriends.add(User(APIConnector.getInstance().getProfileItem(friendId)))
     }
 
     /**
@@ -161,7 +161,7 @@ class User(
      * User must be logged to use this.
      */
     internal fun removeFriendAt(index: Int) {
-        APIConnector.removeFriend(storedFriends[index].id)
+        APIConnector.getInstance().removeFriend(storedFriends[index].id)
         storedFriends.removeAt(index)
     }
 
@@ -171,7 +171,7 @@ class User(
      * User must be logged to use this.
      */
     internal fun removeFriend(friendId: String) {
-        APIConnector.removeFriend(friendId)
+        APIConnector.getInstance().removeFriend(friendId)
         updateStoredFriends()
     }
 
@@ -189,7 +189,7 @@ class User(
      */
     internal fun editInfo(username: String = this.username, name: String = this.name, bio: String = this.bio) {
         try {
-            APIConnector.editUserInfo(username, name, bio)
+            APIConnector.getInstance().editUserInfo(username, name, bio)
             this.username = username
             this.name = name
             this.bio = bio
@@ -203,7 +203,7 @@ class User(
      * User must be logged.
      */
     internal fun editCredentials(mail: String, pass: String) {
-        APIConnector.editUserCredentials(mail, pass)
+        APIConnector.getInstance().editUserCredentials(mail, pass)
     }
 
     /**

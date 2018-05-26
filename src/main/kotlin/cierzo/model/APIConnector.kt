@@ -13,11 +13,19 @@ import java.net.CookieHandler
 import kotlin.math.sign
 
 
-internal object APIConnector {
+internal class APIConnector private constructor(){
     private var apiClient: ApiClient = ApiClient()
     private var publicApi: PublicApi
     private var adminsApi: AdminsApi
     private var usersApi: UsersApi
+
+    companion object {
+        private val instance = APIConnector()
+
+        fun getInstance(): APIConnector {
+            return instance
+        }
+    }
 
     init {
         publicApi = PublicApi(apiClient)
@@ -104,10 +112,10 @@ internal object APIConnector {
         loginItem.mail = mail
         loginItem.pass = pass
 
-        if (!UserLogged.isLogged()) {
+        if (!UserLogged.getInstance().isLogged()) {
             try {
                 var accountItem: AccountItem = publicApi.login(loginItem)
-                UserLogged.onLogin(accountItem)
+                UserLogged.getInstance().onLogin(accountItem)
             } catch (e: ApiException) {
                 throw e
             }
@@ -120,10 +128,10 @@ internal object APIConnector {
      * Do log out and remove the user from UserLogged.
      */
     internal fun logout() {
-        if (UserLogged.isLogged()) {
+        if (UserLogged.getInstance().isLogged()) {
             try {
                 usersApi.logout()
-                UserLogged.onLogout()
+                UserLogged.getInstance().onLogout()
             } catch (e: ApiException) {
                 throw e
             }
@@ -136,7 +144,7 @@ internal object APIConnector {
      * Register a new account on server
      */
     internal fun signup(mail: String, name: String, username: String, pass: String) {
-        if (!UserLogged.isLogged()) {
+        if (!UserLogged.getInstance().isLogged()) {
             try {
                 var signUpItem: SignUpItem = SignUpItem()
                 signUpItem.mail = mail

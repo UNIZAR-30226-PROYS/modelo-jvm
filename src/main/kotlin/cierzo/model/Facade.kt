@@ -11,7 +11,7 @@ import io.swagger.client.ApiException
  */
 fun login(mail: String, pass: String): Boolean {
     try {
-        APIConnector.login(mail, pass)
+        APIConnector.getInstance().login(mail, pass)
         return true
     } catch (e: ApiException) {
         throw e
@@ -25,7 +25,7 @@ fun login(mail: String, pass: String): Boolean {
  */
 fun logout(): Boolean {
     try {
-        APIConnector.logout()
+        APIConnector.getInstance().logout()
         return true
     } catch (e: ApiException) {
         throw e
@@ -39,7 +39,7 @@ fun logout(): Boolean {
  */
 fun signup(mail: String, name: String, username: String, pass: String) {
     try {
-        APIConnector.signup(mail, name, username, pass)
+        APIConnector.getInstance().signup(mail, name, username, pass)
     } catch (e: ApiException) {
         throw e
     } catch (e: Exception) {
@@ -52,7 +52,7 @@ fun signup(mail: String, name: String, username: String, pass: String) {
  */
 fun searchUsers(name: String = "", username: String = "", skip: Int = 0, limit: Int = 1): List<User> {
     return try {
-        ItemArrayConverter.userFromProfile(APIConnector.searchProfiles(name, username, skip, limit))
+        ItemArrayConverter.userFromProfile(APIConnector.getInstance().searchProfiles(name, username, skip, limit))
     } catch (e: ApiException) {
         throw e
     }
@@ -63,7 +63,7 @@ fun searchUsers(name: String = "", username: String = "", skip: Int = 0, limit: 
  */
 fun searchSongs(name: String = "", author: String = "", genre: String = "", skip: Int = 0, limit: Int = 1): List<Song> {
     return try {
-        ItemArrayConverter.songFromSongs(APIConnector.searchSongs(name, author, genre, skip, limit))
+        ItemArrayConverter.songFromSongs(APIConnector.getInstance().searchSongs(name, author, genre, skip, limit))
     } catch (e: ApiException) {
         throw e
     }
@@ -74,7 +74,7 @@ fun searchSongs(name: String = "", author: String = "", genre: String = "", skip
  */
 fun searchAlbums(name: String = "", author: String = "", skip: Int = 0, limit: Int = 1): List<Album> {
     return try {
-        ItemArrayConverter.albumFromAlbum(APIConnector.searchAlbums(name, author, skip, limit))
+        ItemArrayConverter.albumFromAlbum(APIConnector.getInstance().searchAlbums(name, author, skip, limit))
     } catch (e: ApiException) {
         throw e
     }
@@ -85,7 +85,7 @@ fun searchAlbums(name: String = "", author: String = "", skip: Int = 0, limit: I
  */
 fun searchAlbums(name: String = "", skip: Int = 0, limit: Int = 1): List<Author> {
     return try {
-        ItemArrayConverter.authorFromAuthor(APIConnector.searchAuthors(name, skip, limit))
+        ItemArrayConverter.authorFromAuthor(APIConnector.getInstance().searchAuthors(name, skip, limit))
     } catch (e: ApiException) {
         throw e
     }

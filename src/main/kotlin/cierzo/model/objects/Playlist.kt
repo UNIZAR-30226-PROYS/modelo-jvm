@@ -46,10 +46,10 @@ class Playlist(
      * Can be called from the application.
      */
     public fun getOwner(): User {
-        return if (ownerId.equals(UserLogged.user?.id)) {
-            UserLogged.user!!
+        return if (ownerId.equals(UserLogged.getInstance().user?.id)) {
+            UserLogged.getInstance().user!!
         } else {
-            APIConnector.getUser(ownerId)
+            APIConnector.getInstance().getUser(ownerId)
         }
     }
 
@@ -59,7 +59,7 @@ class Playlist(
      */
     internal fun addSong(song: Song) {
         try {
-            APIConnector.addSong(id, song.id)
+            APIConnector.getInstance().addSong(id, song.id)
             songs.add(song)
         } catch (e: ApiException) {
             throw e
@@ -73,7 +73,7 @@ class Playlist(
      */
     internal fun removeSong(index: Int) {
         try {
-            APIConnector.removeSong(id, songs[index].id)
+            APIConnector.getInstance().removeSong(id, songs[index].id)
             songs.removeAt(index)
         } catch (e: ApiException) {
             throw e
@@ -93,7 +93,7 @@ class Playlist(
      * Only available for users who owns this playlist. Should be called only from an User object.
      */
     internal fun removeThis() {
-        APIConnector.removePlaylist(id)
+        APIConnector.getInstance().removePlaylist(id)
     }
 
     /**
@@ -103,7 +103,7 @@ class Playlist(
     public fun getAuthors(): List<Author> {
         var authors: MutableList<Author> = mutableListOf()
         for (song in songs) {
-            authors.add(APIConnector.getAuthor(song.authorID))
+            authors.add(APIConnector.getInstance().getAuthor(song.authorID))
         }
         return authors.distinct()
     }
@@ -115,7 +115,7 @@ class Playlist(
     public fun getAlbums(): List<Album> {
         var albums: MutableList<Album> = mutableListOf()
         for (song in songs) {
-            albums.add(APIConnector.getAlbum(song.albumID))
+            albums.add(APIConnector.getInstance().getAlbum(song.albumID))
         }
         return albums.distinct()
     }
@@ -126,7 +126,7 @@ class Playlist(
      */
     internal fun editInfo(name: String = this.name, description: String = this.description) {
         try {
-            APIConnector.editPlaylistInfo(id, name, description)
+            APIConnector.getInstance().editPlaylistInfo(id, name, description)
             this.name = name
             this.description = description
         } catch (e: Exception) {

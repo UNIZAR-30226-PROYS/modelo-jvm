@@ -3,8 +3,16 @@ package cierzo.model.objects
 import io.swagger.client.ApiException
 import io.swagger.client.model.AccountItem
 
-object UserLogged {
+class UserLogged private constructor() {
     internal var user: User? = null
+
+    companion object {
+        private val instance = UserLogged()
+
+        fun getInstance(): UserLogged {
+            return instance
+        }
+    }
 
     /**
      * Return true if there are an user logged
@@ -172,7 +180,7 @@ object UserLogged {
      */
     public fun saveSession() {
         if (isLogged()) {
-            Session.saveSession()
+            Session.getInstance().saveSession()
         } else {
             throw Exception("User not logged")
         }
@@ -183,7 +191,7 @@ object UserLogged {
      */
     public fun restoreSession() {
         if (isLogged()) {
-            Session.restoreSession()
+            Session.getInstance().restoreSession()
         } else {
             throw Exception("User not logged")
         }

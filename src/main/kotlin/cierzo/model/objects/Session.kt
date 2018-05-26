@@ -5,10 +5,19 @@ import cierzo.model.APIConnector
 /**
  * This object saves the current session playing
  */
-object Session {
+class Session private constructor() {
     var playlistId: String? = null
     var second: String? = null
     var songId: String? = null
+
+    companion object {
+        private val instance = Session()
+
+        fun getInstance(): Session {
+            return instance
+        }
+    }
+
 
     /**
      * Returns if is any session stored here.
@@ -27,7 +36,7 @@ object Session {
      * User must be logged.
      */
     internal fun restoreSession() {
-        var session: Set<String> = APIConnector.getSession()
+        var session: Set<String> = APIConnector.getInstance().getSession()
         playlistId = session.elementAt(0)
         second = session.elementAt(1)
         songId = session.elementAt(2)
@@ -39,7 +48,7 @@ object Session {
      */
     internal fun saveSession() {
         if (isSessionStored()) {
-            APIConnector.saveSession(playlistId!!, second!!, songId!!)
+            APIConnector.getInstance().saveSession(playlistId!!, second!!, songId!!)
         } else {
             throw Exception("No session stored")
         }
