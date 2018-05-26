@@ -37,7 +37,8 @@ class Playlist(
             date = playlistItem.creationDate,
             imageURL = "",
             songAmount = 0) {
-        imageURL = songs[0].imageURL // La imagen de la playlist es la imagen de la primera canción
+        // La imagen de la playlist es la imagen de la primera canción
+        imageURL = if (songs.size != 0) { songs[0].imageURL } else { "" }
         songAmount = songs.size
     }
 
@@ -46,8 +47,8 @@ class Playlist(
      * Can be called from the application.
      */
     public fun getOwner(): User {
-        return if (ownerId.equals(UserLogged.getInstance().user?.id)) {
-            UserLogged.getInstance().user!!
+        return if (ownerId.equals(UserLogged.getInstance().getUser().id)) {
+            UserLogged.getInstance().getUser()
         } else {
             APIConnector.getInstance().getUser(ownerId)
         }

@@ -4,7 +4,7 @@ import io.swagger.client.ApiException
 import io.swagger.client.model.AccountItem
 
 class UserLogged private constructor() {
-    internal var user: User? = null
+    private var user: User? = null
 
     companion object {
         private val instance = UserLogged()
@@ -22,6 +22,17 @@ class UserLogged private constructor() {
             false
         } else {
             true
+        }
+    }
+
+    /**
+     * Return the logged user (as User)
+     */
+    internal fun getUser(): User {
+        return if (isLogged()) {
+            user!!
+        } else {
+            throw Exception("User not logged")
         }
     }
 

@@ -8,7 +8,9 @@ import io.swagger.client.api.AdminsApi
 import io.swagger.client.api.PublicApi
 import io.swagger.client.api.UsersApi
 import io.swagger.client.model.*
+import org.jetbrains.annotations.TestOnly
 import sun.java2d.cmm.Profile
+import sun.rmi.runtime.Log
 import java.net.CookieHandler
 import kotlin.math.sign
 
@@ -281,5 +283,18 @@ internal class APIConnector private constructor(){
         playlistItemNew.name = name
         playlistItemNew.description = description
         usersApi.updatePlaylist(playlistId, playlistItemNew)
+    }
+
+    @TestOnly
+    internal fun getAccountItem(userId: String): AccountItem {
+        return usersApi.account
+    }
+
+    @TestOnly
+    internal fun loginWReturn(mail: String, pass: String): AccountItem {
+        var loginItem: LoginItem = LoginItem()
+        loginItem.mail = mail
+        loginItem.pass = pass
+        return publicApi.login(loginItem)
     }
 }

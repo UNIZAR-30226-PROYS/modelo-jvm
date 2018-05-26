@@ -40,6 +40,7 @@ class User(
         accountItem = accountItem,
         profileItem = null)
 
+
     /**
      * Constructor with a FriendItem. Used when this user is created as friend of other.
      */
