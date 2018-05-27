@@ -90,3 +90,23 @@ fun searchAlbums(name: String = "", skip: Int = 0, limit: Int = 1): List<Author>
         throw e
     }
 }
+
+/**
+ * Download from server a specific object
+ */
+fun getFromServer(type: Int, id: String): Any {
+    return when (type) {
+        PLAYLIST -> APIConnector.getInstance().getPlaylist(id.toInt()) // as Playlist
+        ALBUM -> APIConnector.getInstance().getAlbum(id) // as Album
+        SONG -> APIConnector.getInstance().getSong(id) // as Song
+        AUTHOR -> APIConnector.getInstance().getAuthor(id) // as Author
+        USER -> APIConnector.getInstance().getUser(id) // as User
+        else -> throw Exception("Invalid type")
+    }
+}
+
+public const val PLAYLIST = 0
+public const val ALBUM = 1
+public const val SONG = 2
+public const val AUTHOR = 3
+public const val USER = 4

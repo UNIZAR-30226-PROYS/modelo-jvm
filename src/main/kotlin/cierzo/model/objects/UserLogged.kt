@@ -255,4 +255,27 @@ class UserLogged private constructor() {
             throw Exception("User not logged")
         }
     }
+
+    /**
+     * Search on all stored playlists (of the user and their friends) a specific playlist by id
+     */
+    /*public fun searchOnStoredPlaylists(playlistId: String): Playlist? {
+        if (isLogged()) {
+            for (playlist in user!!.getStoredPlaylists()) { // Frist search on user stored playlists
+                if (playlist.id == playlistId) {
+                    return playlist
+                }
+            }
+            for (friend in user!!.getStoredFriends()) { // Second search on stored playlist from friends of the user
+                for (playlist in friend.getStoredPlaylists()) {
+                    if (playlist.id == playlistId) {
+                        return playlist
+                    }
+                }
+            }
+            return null
+        } else {
+            throw Exception("User not logged")
+        }
+    }*/
 }

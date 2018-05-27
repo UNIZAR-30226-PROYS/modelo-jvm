@@ -297,4 +297,8 @@ internal class APIConnector private constructor(){
         loginItem.pass = pass
         return publicApi.login(loginItem)
     }
+
+    internal fun getSong(songId: String): Song {
+        return Song(publicApi.getSong(songId))
+    }
 }
