@@ -26,4 +26,16 @@ class Author(
             albums = ItemArrayConverter.albumFromAlbum(authorItem.albums),
             imageURL = "${ApiClient.basePath}/authors/${authorItem.id}/image"
     )
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Author) {
+            if (other.id.equals(this.id)) {
+                true
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    }
 }

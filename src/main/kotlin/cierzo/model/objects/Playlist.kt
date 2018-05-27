@@ -152,4 +152,16 @@ class Playlist(
         return songs
     }
 
+    override fun equals(other: Any?): Boolean {
+        return if (other is Playlist) {
+            if (other.id.equals(this.id)) {
+                true
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    }
+
 }

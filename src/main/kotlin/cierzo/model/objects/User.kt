@@ -228,4 +228,16 @@ class User(
         }
         throw Exception("Playlist not found or user doesn't own it.")
     }
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is User) {
+            if (other.id.equals(this.id)) {
+                true
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    }
 }

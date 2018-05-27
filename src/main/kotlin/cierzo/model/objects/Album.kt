@@ -37,4 +37,16 @@ class Album (
             desc = albumItem.description,
             date = albumItem.publishDate
     )
+
+    override fun equals(other: Any?): Boolean {
+        return if (other is Album) {
+            if (other.id.equals(this.id)) {
+                true
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    }
 }

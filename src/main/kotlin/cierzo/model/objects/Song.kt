@@ -42,5 +42,16 @@ class Song (
             imageURL = "${ApiClient.basePath}/songs/${songItem.id}/image",
             fileURL = "${ApiClient.basePath}/songs/${songItem.id}/file")
 
+    override fun equals(other: Any?): Boolean {
+        return if (other is Song) {
+            if (other.id.equals(this.id)) {
+                true
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    }
 
 }
