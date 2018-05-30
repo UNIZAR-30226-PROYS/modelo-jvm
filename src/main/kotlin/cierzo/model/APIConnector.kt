@@ -301,4 +301,8 @@ internal class APIConnector private constructor(){
     internal fun getSong(songId: String): Song {
         return Song(publicApi.getSong(songId))
     }
+
+    internal fun removeUser() {
+        return usersApi.deleteAccount()
+    }
 }

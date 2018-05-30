@@ -21,7 +21,7 @@ class Playlist(
     internal val id: String,
     internal var songs: MutableList<Song>,
     internal var name: String,
-    private var ownerId: String,
+     private var ownerId: String,
     internal var description: String,
     internal var date: LocalDate,
     internal var imageURL: String,

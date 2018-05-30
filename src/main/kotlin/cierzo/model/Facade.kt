@@ -83,7 +83,7 @@ fun searchAlbums(name: String = "", author: String = "", skip: Int = 0, limit: I
 /**
  * Return a list (not mutable) from server of authors (as Author) that match with the parameters.
  */
-fun searchAlbums(name: String = "", skip: Int = 0, limit: Int = 1): List<Author> {
+fun searchAuthors(name: String = "", skip: Int = 0, limit: Int = 1): List<Author> {
     return try {
         ItemArrayConverter.authorFromAuthor(APIConnector.getInstance().searchAuthors(name, skip, limit))
     } catch (e: ApiException) {
@@ -104,6 +104,9 @@ fun getFromServer(type: Int, id: String): Any {
         else -> throw Exception("Invalid type")
     }
 }
+
+
+
 
 public const val PLAYLIST = 0
 public const val ALBUM = 1

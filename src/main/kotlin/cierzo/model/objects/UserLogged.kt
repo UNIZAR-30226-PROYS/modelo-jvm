@@ -1,5 +1,6 @@
 package cierzo.model.objects
 
+import cierzo.model.APIConnector
 import io.swagger.client.ApiException
 import io.swagger.client.model.AccountItem
 
@@ -251,6 +252,14 @@ class UserLogged private constructor() {
     public fun editPlaylistInfo(name: String = "", description: String = "") {
         if (isLogged()) {
             user!!.editPlaylistInfo(name, description)
+        } else {
+            throw Exception("User not logged")
+        }
+    }
+
+    public fun removeLoggedUser() {
+        if (isLogged()) {
+            APIConnector.getInstance().removeUser()
         } else {
             throw Exception("User not logged")
         }
